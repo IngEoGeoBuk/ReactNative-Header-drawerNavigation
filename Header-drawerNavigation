@@ -1,0 +1,96 @@
+import React from 'react';
+import { StyleSheet, View, Image, Button, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+import Icon from 'react-native-vector-icons/Ionicons';
+
+import Home from './screens/Home';
+import Screen1 from './screens/Screen1';
+import Screen2 from './screens/Screen2';
+
+const HomeStack = createStackNavigator();
+const Screen1Stack = createStackNavigator();
+const Screen2Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+
+const HomeStackScreen = ({navigation}) => (
+  <HomeStack.Navigator screenOptions = {{
+    headerStyle: {
+      backgroundColor: "#009387",
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: 'blod'
+    }
+  }}>
+    <HomeStack.Screen name="Home" component={Home} options = {{ 
+      title: 'Overview', 
+      headerLeft: () => (
+        <Icon.Button name="ios-menu" size={25} backgroundColor="#009387"
+        onPress={() => navigation.openDrawer()}>
+        </Icon.Button>
+      )
+    }}
+    />
+  </HomeStack.Navigator>
+);
+
+
+const Screen1StackScreen = ({navigation}) => (
+  <Screen1Stack.Navigator screenOptions = {{
+    headerStyle: {
+      backgroundColor: "#009387",
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    <Screen1Stack.Screen name="Screen1" component={Screen1} 
+      options = {{ headerLeft: () => (
+        <Icon.Button name="ios-menu" size={25} backgroundColor="#009387"
+        onPress={() => navigation.openDrawer()}>
+        </Icon.Button>
+      )}}
+    />
+  </Screen1Stack.Navigator>
+);
+
+
+const Screen2StackScreen = ({navigation}) => (
+  <Screen2Stack.Navigator screenOptions = {{
+    headerStyle: {
+      backgroundColor: "#009387",
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    <Screen2Stack.Screen name="Screen2" component={Screen2} 
+      options = {{ headerLeft: () => (
+        <Icon.Button name="ios-menu" size={25} backgroundColor="#009387"
+        onPress={() => navigation.openDrawer()}>
+        </Icon.Button>
+      )}}
+    />
+  </Screen2Stack.Navigator>
+);
+
+
+
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeStackScreen} />
+        <Drawer.Screen name="Screen1" component={Screen1StackScreen} />
+        <Drawer.Screen name="Screen2" component={Screen2StackScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
